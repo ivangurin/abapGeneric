@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>R</LANGU>
+    <DESCRIPT>Âñïîìîãàòåëüíûå ìåòîäû äëÿ ðàáîòû ñî ñòðîêàìè</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <CLSFINAL>X</CLSFINAL>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>CONVERT_GUID_IN</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàíèå GUID âî  âíóòðåííèé âèä</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>CONVERT_GUID_OUT</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàíèå GUID â òåêñòîâûé âèä</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>CONVERT_STR2XSTR</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàòü string â xstring</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>CONVERT_XSTR2STR</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàòü xstring â string</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>DATE2DATE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîíàíèå äàòû</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>LOWER_CASE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàíèå òåêñòà ñòðî÷íûìè áóêâàì</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>READ</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Read</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>TRANSLIT</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïåðâîä òåêñòà â òðàíñèò</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>UPPER_CASE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðåîáðàçîâàíèå òåêñòà ÇÀÃËÀÂÍÛÌÈ áóêâàìè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>WORD_WRAP</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïåðåíîñ ïî ñëîâàì</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TEXT_STATIC</CLSNAME>
+     <CMPNAME>WRITE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Âûïîëíåíèå write</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

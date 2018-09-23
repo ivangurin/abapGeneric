@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>R</LANGU>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <CLSFINAL>X</CLSFINAL>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+    <MSG_ID>ZSRM_COMMON</MSG_ID>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>DAY</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>DAY</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_PERIOD_LIST</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîë÷åíèå ñïèñêà ïåðèîäîâ</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_PERIOD_VALUES</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîë÷åíèå çíà÷åíèé ïåðèîäîâ</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_QUARTER_DATE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîëó÷èòü äàòó íà÷àëà êâàðòàëà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_WEEK_FIRST_DAY</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîëó÷åíèå äàòû ïåðâîãî äíÿ íåäåëè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_WEEK_FOR_DATE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîëó÷åíèå íåäåëè íà äàòó</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>GET_WEEK_LAST_DAY</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîëó÷åíèå äàòû ïîñëåäíåãî äíÿ íåäåëè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>HAS_TIME_COME</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïðîâåðêà íà íàñòóïëåíèå âðåìåíè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_DATE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Äàòà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_DATE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Äàòà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_TIME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Ïîëå òèïà TIMS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_TIME</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ïîëå òèïà TIMS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_TIMESTAMP</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Ìåòêà UTC-âðåìåíè â êðàòêîé ôîðìå (ÃÃÃÃÌÌÄÄ÷÷ììññ)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>LAST_TIMESTAMP</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Ìåòêà UTC-âðåìåíè â êðàòêîé ôîðìå (ÃÃÃÃÌÌÄÄ÷÷ììññ)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>MONTH</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>MONTH</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>QUARTER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>QUARTER</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>RANGE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>RANGE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>TZ_MSK</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Äåáèòîðû:  ðåãèîíàëüíûå çîíû</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>TZ_MSK</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Äåáèòîðû:  ðåãèîíàëüíûå çîíû</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>TZ_UTC</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>×àñîâîé ïîÿñ äëÿ ïîëåé äàòû è âðåìåíè äîêóìåíòà çàãîòîâêè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>TZ_UTC</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>×àñîâîé ïîÿñ äëÿ ïîëåé äàòû è âðåìåíè äîêóìåíòà çàãîòîâêè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>WEEK</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>WEEK</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>YEAR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TIME_STATIC</CLSNAME>
+     <CMPNAME>YEAR</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

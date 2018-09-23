@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_BDC</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>R</LANGU>
+    <DESCRIPT>Batch Input</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <CLSFINAL>X</CLSFINAL>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>ADD_ACTION</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Äîáàâëåíå ñîáûòèÿ</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>ADD_FIELD</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Äîáàâëåíèå ïîëÿ</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>ADD_SCREEN</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Äîáàâëåíèå ýêðàíà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>DATA</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Òàáëèöà: äàííûå ïàêåòíîãî ââîäà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>MODE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>RUN</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Çàïóñê</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>UPDATE</CMPNAME>
+     <LANGU>R</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
