@@ -32,6 +32,7 @@ public section.
   constants LAST_TIMESTAMP type TIMESTAMP value '99991231195959' ##NO_TEXT.
   constants TZ_MSK type TZNZONE value 'RUS03' ##NO_TEXT.
   constants TZ_UTC type TZNZONE value 'UTC' ##NO_TEXT.
+  constants TZ_SYSTEM type TZNZONE value 'UTC' ##NO_TEXT.
 
   class-methods GET_TIMESTAMP
     importing

@@ -1,37 +1,37 @@
-class ZCL_BDC definition
+class zcl_bdc definition
   public
   final
   create public .
 
 *"* public components of class ZCL_BDC
 *"* do not include other source files here!!!
-public section.
-  type-pools ABAP .
+  public section.
+    type-pools abap .
 
-  data MODE type CHAR1 value 'E'. "#EC NOTEXT             " .
-  data UPDATE type CHAR1 value 'S'. "#EC NOTEXT           " .
-  data DATA type HRTB_BDCDATA read-only .
+    data mode type char1 value 'E' ##NO_TEXT.              " .
+    data update type char1 value 'S' ##NO_TEXT.            " .
+    data data type hrtb_bdcdata read-only .
 
-  methods ADD_SCREEN
-    importing
-      !I_PROG type SIMPLE
-      !I_NUMBER type SIMPLE .
-  methods ADD_ACTION
-    importing
-      !I_ACTION type SIMPLE .
-  methods ADD_FIELD
-    importing
-      !I_NAME type SIMPLE
-      !I_VALUE type SIMPLE .
-  methods RUN
-    importing
-      !I_TRANS type SIMPLE
-    returning
-      value(ET_MESSAGES) type ZIMESSAGES .
-protected section.
+    methods add_screen
+      importing
+        !i_prog   type simple
+        !i_number type simple .
+    methods add_action
+      importing
+        !i_action type simple .
+    methods add_field
+      importing
+        !i_name  type simple
+        !i_value type simple .
+    methods run
+      importing
+        !i_trans           type simple
+      returning
+        value(et_messages) type zimessages .
+  protected section.
 *"* protected components of class ZCL_BDC
 *"* do not include other source files here!!!
-private section.
+  private section.
 *"* private components of class ZCL_BDC
 *"* do not include other source files here!!!
 ENDCLASS.
@@ -41,50 +41,50 @@ ENDCLASS.
 CLASS ZCL_BDC IMPLEMENTATION.
 
 
-method add_action.
+  method add_action.
 
-  field-symbols <ls_data> like line of data.
-  append initial line to data assigning <ls_data>.
+    field-symbols <ls_data> like line of data.
+    append initial line to data assigning <ls_data>.
 
-  <ls_data>-fnam = 'BDC_OKCODE'.
-  <ls_data>-fval = i_action.
+    <ls_data>-fnam = 'BDC_OKCODE'.
+    <ls_data>-fval = i_action.
 
-endmethod.
-
-
-method add_field.
-
-  field-symbols <ls_data> like line of data.
-  append initial line to data assigning <ls_data>.
-
-  <ls_data>-fnam = i_name.
-  <ls_data>-fval = i_value.
-
-endmethod.
+  endmethod.
 
 
-method add_screen.
+  method add_field.
 
-  field-symbols <ls_data> like line of data.
-  append initial line to data assigning <ls_data>.
+    field-symbols <ls_data> like line of data.
+    append initial line to data assigning <ls_data>.
 
-  <ls_data>-dynbegin = abap_true.
-  <ls_data>-program  = i_prog.
-  <ls_data>-dynpro   = i_number.
+    <ls_data>-fnam = i_name.
+    <ls_data>-fval = i_value.
 
-endmethod.
+  endmethod.
 
 
-method run.
+  method add_screen.
 
-  data lt_messages type ettcd_msg_tabtype.
-  call transaction i_trans
-    using data
-    mode mode
-    update update
-    messages into lt_messages.
+    field-symbols <ls_data> like line of data.
+    append initial line to data assigning <ls_data>.
 
-  et_messages = zcl_message_static=>bdc2msg( lt_messages ).
+    <ls_data>-dynbegin = abap_true.
+    <ls_data>-program  = i_prog.
+    <ls_data>-dynpro   = i_number.
 
-endmethod.
+  endmethod.
+
+
+  method run.
+
+    data lt_messages type ettcd_msg_tabtype.
+    call transaction i_trans
+      using data
+      mode mode
+      update update
+      messages into lt_messages.
+
+    et_messages = zcl_message_static=>bdc2msg( lt_messages ).
+
+  endmethod.
 ENDCLASS.

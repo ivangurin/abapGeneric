@@ -1,4 +1,4 @@
-class ZCL_LOG definition
+class zcl_log definition
   public
   final
   create public .

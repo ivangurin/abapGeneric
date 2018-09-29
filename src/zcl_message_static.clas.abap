@@ -6,13 +6,13 @@ class ZCL_MESSAGE_STATIC definition
 *"* do not include other source files here!!!
 public section.
 
-  constants SUCCESS type MSGTY value 'S'. "#EC NOTEXT
-  constants WARNING type MSGTY value 'W'. "#EC NOTEXT
-  constants ERROR type MSGTY value 'E'. "#EC NOTEXT
-  constants TYPE_SUCCESS type STRING value 'success'. "#EC NOTEXT
-  constants TYPE_WARNING type STRING value 'warning'. "#EC NOTEXT
-  constants TYPE_ERROR type STRING value 'error'. "#EC NOTEXT
-  constants TYPE_INFO type STRING value 'info'. "#EC NOTEXT
+  constants SUCCESS type MSGTY value 'S' ##NO_TEXT.
+  constants WARNING type MSGTY value 'W' ##NO_TEXT.
+  constants ERROR type MSGTY value 'E' ##NO_TEXT.
+  constants TYPE_SUCCESS type STRING value 'success' ##NO_TEXT.
+  constants TYPE_WARNING type STRING value 'warning' ##NO_TEXT.
+  constants TYPE_ERROR type STRING value 'error' ##NO_TEXT.
+  constants TYPE_INFO type STRING value 'info' ##NO_TEXT.
 
   class-methods GET_TEXT
     importing
@@ -75,6 +75,14 @@ public section.
       !IR_OI type ref to I_OI_ERROR
     returning
       value(ET_MESSAGES) type ZIMESSAGES .
+  class-methods WRITE
+    importing
+      !IT_MESSAGES type ZIMESSAGES .
+  class-methods GET_HTML
+    importing
+      !IT_MESSAGES type ZIMESSAGES
+    returning
+      value(E_HTML) type STRING .
 protected section.
 *"* protected components of class ZCLSRM_MESSAGE
 *"* do not include other source files here!!!
@@ -136,6 +144,38 @@ method bdc2msg.
     <ls_message>-msgno = ls_message-msgnr.
 
   endloop.
+
+endmethod.
+
+
+method get_html.
+
+  check it_messages is not initial.
+
+  e_html = '<ul>'.
+
+  data ls_message like line of it_messages.
+  loop at it_messages into ls_message.
+
+    data l_message type string.
+    l_message =
+      get_text(
+        is_message = ls_message ).
+
+    case ls_message-msgty.
+      when 'E' or 'A' or 'X'.
+        l_message = `Ошибка: ` && l_message.
+      when 'W'.
+        l_message = `Предупреждение: ` && l_message.
+      when 'S'.
+        l_message = `Информация: ` && l_message.
+    endcase.
+
+    e_html = e_html && '<li>' && l_message && '</li>'.
+
+  endloop.
+
+  e_html = e_html && '</ul>'.
 
 endmethod.
 
@@ -318,6 +358,26 @@ method root2messages.
         c_t_bapiret2  = lt_return.
 
     et_messages = bapiret2msg( lt_return ).
+
+  endmethod.
+
+
+  method write.
+
+    data ls_message like line of it_messages.
+    loop at it_messages into ls_message.
+
+      data l_text type string.
+      l_text =
+        zcl_message_static=>get_text(
+          is_message = ls_message ).
+
+      data l_msgid type string.
+      l_msgid = sy-msgid.
+
+      write: / sy-msgty no-gap, sy-msgno no-gap, '(' no-gap, l_msgid no-gap, '):', l_text .
+
+    endloop.
 
   endmethod.
 ENDCLASS.

@@ -36,8 +36,20 @@
     <SEOCOMPOTX>
      <CLSNAME>ZCL_BDC</CLSNAME>
      <CMPNAME>DATA</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Òàáëèöà: äàííûå ïàêåòíîãî ââîäà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>DATA</CMPNAME>
      <LANGU>R</LANGU>
      <DESCRIPT>Òàáëèöà: äàííûå ïàêåòíîãî ââîäà</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>MODE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_BDC</CLSNAME>
@@ -50,6 +62,12 @@
      <CMPNAME>RUN</CMPNAME>
      <LANGU>R</LANGU>
      <DESCRIPT>Çàïóñê</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_BDC</CLSNAME>
+     <CMPNAME>UPDATE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Èíäèêàòîð èç îäíîé ïîçèöèè</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_BDC</CLSNAME>

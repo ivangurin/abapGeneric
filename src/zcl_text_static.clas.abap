@@ -9,59 +9,6 @@ public section.
 
   constants XOR_BASE type X value 131 ##NO_TEXT.
 
-  class-methods CONVERT_STR2XSTR
-    importing
-      !I_TEXT type SIMPLE
-      !I_ENCODING type ABAP_ENCODING default 'DEFAULT'
-    returning
-      value(E_XTEXT) type XSTRING .
-  class-methods CONVERT_XSTR2STR
-    importing
-      !I_XTEXT type SIMPLE
-      !I_ENCODING type ABAP_ENCODING default 'DEFAULT'
-    returning
-      value(E_TEXT) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods BASE64_ENCODE
-    importing
-      !I_TEXT type SIMPLE
-    returning
-      value(E_TEXT) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods BASE64_DECODE
-    importing
-      !I_TEXT type SIMPLE
-    returning
-      value(E_TEXT) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods WORD_WRAP
-    importing
-      !I_STR type DATA
-      !I_WIDTH type I default 40
-    returning
-      value(R_STR) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods REMOVE_SYMBLOS
-    importing
-      !I_TEXT type SIMPLE
-      !I_SYMBOLS type SIMPLE
-      !I_ALLOWED type ABAP_BOOL default ABAP_TRUE
-    returning
-      value(E_TEXT) type STRING .
-  class-methods CONVERT_ITF2STR
-    importing
-      !I_ITF type TLINETAB
-    returning
-      value(R_STR) type STRING .
-  class-methods CONVERT_STR2ITF
-    importing
-      !I_STR type STRING
-    exporting
-      !E_ITF type TLINETAB .
   class-methods READ
     importing
       !I_NAME type SIMPLE
@@ -104,21 +51,6 @@ public section.
       value(E_TEXT) type STRING
     raising
       ZCX_GENERIC .
-  class-methods CONVERT_GUID_IN
-    importing
-      !I_GUID type SIMPLE
-    returning
-      value(E_GUID) type STRING .
-  class-methods CONVERT_GUID_OUT
-    importing
-      !I_GUID type SIMPLE
-    returning
-      value(E_GUID) type STRING .
-  class-methods WRITE
-    importing
-      !I_TEXT type SIMPLE
-    returning
-      value(E_TEXT) type STRING .
   class-methods UPPER_CASE
     importing
       !I_TEXT type SIMPLE
@@ -129,11 +61,6 @@ public section.
       !I_TEXT type SIMPLE
     returning
       value(E_TEXT) type STRING .
-  class-methods DATE2DATE
-    importing
-      !I_DATE type SIMPLE
-    returning
-      value(E_DATE) type D .
   class-methods TRANSLIT
     importing
       !I_TEXT type SIMPLE
@@ -141,6 +68,45 @@ public section.
       value(E_TEXT) type STRING
     raising
       ZCX_GENERIC .
+  class-methods GET_WORD
+    importing
+      !I_TEXT type SIMPLE
+      !I_INDEX type I default 1
+      !I_SEPARATOR type CHAR1 default SPACE
+    returning
+      value(E_TEXT) type STRING .
+  class-methods LIKE_NAME
+    importing
+      !I_TEXT type SIMPLE
+    returning
+      value(E_TEXT) type STRING .
+  class-methods WORD_WRAP
+    importing
+      !I_STR type DATA
+      !I_WIDTH type I default 40
+    returning
+      value(R_STR) type STRING
+    raising
+      ZCX_GENERIC .
+  class-methods REMOVE_SYMBLOS
+    importing
+      !I_TEXT type SIMPLE
+      !I_SYMBOLS type SIMPLE
+      !I_ALLOWED type ABAP_BOOL default ABAP_TRUE
+    returning
+      value(E_TEXT) type STRING .
+  class-methods GET_PART
+    importing
+      !I_TEXT type SIMPLE
+      !I_OFFSET type I
+      !I_LENGTH type I
+    returning
+      value(E_TEXT) type STRING .
+  class-methods GET_MD5
+    importing
+      !I_TEXT type SIMPLE
+    returning
+      value(E_HASH) type STRING .
   protected section.
 *"* protected components of class ZCL_TEXT_STATIC
 *"* do not include other source files here!!!
@@ -154,186 +120,60 @@ ENDCLASS.
 CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
 
 
-  method base64_decode.
+  method get_md5.
 
-    if i_text is initial.
-      return.
-    endif.
-
-    data l_text type string.
-    l_text = i_text.
-
-    constants lc_op_dec type x value 37.
-    data l_xtext type xstring.
-    call 'SSF_ABAP_SERVICE'
-      id 'OPCODE'  field lc_op_dec
-      id 'BINDATA' field l_xtext
-      id 'B64DATA' field l_text.
-
-    e_text = convert_xstr2str( l_xtext ).
-
-  endmethod.
-
-
-  method base64_encode.
-
-    if i_text is initial.
-      return.
-    endif.
-
-    data l_text type string.
-    l_text = i_text.
-
-    data l_xtext type xstring.
-    l_xtext = convert_str2xstr( l_text ).
-
-    constants lc_op_enc type x value 36.
-    call 'SSF_ABAP_SERVICE'
-      id 'OPCODE'  field lc_op_enc
-      id 'BINDATA' field l_xtext
-      id 'B64DATA' field e_text.
-
-  endmethod.
-
-
-  method convert_guid_in.
-
-    data l_guid(36).
-    l_guid = i_guid.
-
-    translate l_guid to upper case.
-
-    concatenate l_guid(8) l_guid+9(4) l_guid+14(4) l_guid+19(4) l_guid+24(12)
-      into e_guid.
-
-  endmethod.
-
-
-  method convert_guid_out.
-
-    data l_guid(32).
-    l_guid = i_guid.
-
-    concatenate l_guid(8) l_guid+8(4) l_guid+12(4) l_guid+16(4) l_guid+20(12)
-      into e_guid separated by '-'.
-
-    translate e_guid to lower case.
-
-  endmethod.
-
-
-  method convert_itf2str.
-
-    data stream type string_table.
-    call function 'CONVERT_ITF_TO_STREAM_TEXT'
+    data l_hash type md5_fields-hash.
+    call function 'MD5_CALCULATE_HASH_FOR_CHAR'
       exporting
-        lf           = 'X'
+        data           = i_text
+*       LENGTH         = 0
+*       VERSION        = 1
       importing
-        stream_lines = stream
-      tables
-        itf_text     = i_itf.
+        hash           = l_hash
+* TABLES
+*       DATA_TAB       =
+      exceptions
+        no_data        = 1
+        internal_error = 2
+        others         = 3.
 
-    data: s type string.
-    loop at stream into s.
-      if sy-tabix = 1.
-        r_str = s.
-      else.
-        concatenate r_str s into r_str separated by cl_abap_char_utilities=>newline.
-      endif.
-    endloop.
+    e_hash = l_hash.
 
   endmethod.
 
 
-  method convert_str2itf.
+  method get_part.
 
-    data stream type string_table.
-    append i_str to stream.
-
-    call function 'CONVERT_STREAM_TO_ITF_TEXT'
-      exporting
-        stream_lines = stream
-        lf           = 'X'
-      tables
-        itf_text     = e_itf.
+    e_text = i_text+i_offset(i_length).
 
   endmethod.
 
 
-  method convert_str2xstr.
+  method get_word.
 
-    if i_text is initial.
-      return.
-    endif.
+    check i_text is not initial.
 
-    data l_text type string.
-    l_text = i_text.
+    check i_index is not initial.
 
-    data l_length type i.
-    l_length = strlen( l_text ).
+    data lt_text type stringtab.
+    split i_text at i_separator into table lt_text.
 
-    data lr_conv type ref to cl_abap_conv_out_ce.
-    lr_conv =
-      cl_abap_conv_out_ce=>create(
-        encoding    = i_encoding
-        ignore_cerr = abap_true ).
+    read table lt_text into e_text index i_index.
 
-    lr_conv->write(
-      data = l_text
-      n    = l_length ).
-
-    e_xtext = lr_conv->get_buffer( ).
-
-***  data lr_converter type ref to cl_abap_conv_out_ce.
-***  lr_converter = cl_abap_conv_out_ce=>create( ).
-***
-***  lr_converter->convert(
-***    exporting data   = l_text
-***    importing buffer = e_xtext ).
+    e_text = condense( e_text ).
 
   endmethod.
 
 
-  method convert_xstr2str.
+  method like_name.
 
-    if i_xtext is initial.
-      return.
-    endif.
+    check i_text is not initial.
 
-    data l_xtext type xstring.
-    l_xtext = i_xtext.
+    data l_text(1000).
+    l_text = lower_case( i_text ).
+    l_text(1) = upper_case( l_text(1) ).
 
-    data lr_conv type ref to cl_abap_conv_in_ce.
-    lr_conv =
-      cl_abap_conv_in_ce=>create(
-        input       = l_xtext
-        encoding    = i_encoding
-        ignore_cerr = abap_true ).
-
-    lr_conv->read(
-      importing
-        data = e_text ).
-
-***  data lr_converter type ref to cl_abap_conv_in_ce.
-***  lr_converter = cl_abap_conv_in_ce=>create( ).
-***
-***  lr_converter->convert(
-***    exporting input = l_xtext
-***    importing data  = e_text ).
-
-  endmethod.
-
-
-  method date2date.
-
-    if i_date is initial.
-      return.
-    endif.
-
-    data l_date(10).
-    l_date = i_date.
-
-    concatenate l_date+6(4) l_date+3(2) l_date(2) into e_date.
+    e_text = l_text.
 
   endmethod.
 
@@ -424,12 +264,12 @@ CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
       zcx_generic=>raise( ).
     endif.
 
-    e_text = convert_itf2str( lt_lines ).
+    e_text = zcl_convert_static=>itf2text( lt_lines ).
 
   endmethod.
 
 
-  method remove_symblos.
+  method REMOVE_SYMBLOS.
 
     if i_text is initial.
       return.
@@ -481,9 +321,7 @@ CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
   method save.
 
     data lt_itf type tlinetab.
-    convert_str2itf(
-      exporting i_str = i_text
-      importing e_itf = lt_itf ).
+    lt_itf = zcl_convert_static=>text2itf( i_text ).
 
     data ls_thead type thead.
     ls_thead-tdobject = i_object.
@@ -571,7 +409,7 @@ CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
           exporting data   = i_text
           importing buffer = l_text ).
 
-        e_text = convert_xstr2str( l_text ).
+        e_text = zcl_convert_static=>xtext2text( l_text ).
 
       catch cx_root.
         zcx_generic=>raise( ).
@@ -591,7 +429,7 @@ CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
   endmethod.
 
 
-  method word_wrap.
+  method WORD_WRAP.
 
     try.
 
@@ -634,16 +472,6 @@ CLASS ZCL_TEXT_STATIC IMPLEMENTATION.
         r_str = i_str.
 
     endtry.
-
-  endmethod.
-
-
-  method write.
-
-    data l_text(100).
-    write i_text to l_text left-justified no-gap.
-
-    e_text = l_text.
 
   endmethod.
 ENDCLASS.

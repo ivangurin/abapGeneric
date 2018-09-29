@@ -346,17 +346,7 @@ endmethod.
 
 method write.
 
-  data ls_message like line of t_messages.
-  loop at t_messages into ls_message.
-
-    data l_text type string.
-    l_text =
-      zcl_message_static=>get_text(
-        is_message = ls_message ).
-
-    write: / sy-msgty no-gap, ':', l_text .
-
-  endloop.
+  zcl_message_static=>write( t_messages ).
 
 endmethod.
 ENDCLASS.

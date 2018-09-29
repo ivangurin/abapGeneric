@@ -187,42 +187,6 @@ public section.
       !IT_LIST type TABLE
     changing
       !CT_LIST type TABLE .
-  class-methods CSV2TABLE
-    importing
-      !IT_DATA type STRINGTAB
-    exporting
-      !ET_DATA type TABLE .
-  class-methods TABLE2CSV
-    importing
-      !IT_DATA type ANY TABLE
-    returning
-      value(ET_DATA) type STRINGTAB .
-  class-methods DATA2JSON
-    importing
-      !I_DATA type DATA
-    returning
-      value(E_JSON) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods JSON2DATA
-    importing
-      !I_JSON type SIMPLE
-    exporting
-      !E_DATA type DATA .
-  class-methods DATA2XML
-    importing
-      !I_DATA type DATA
-    returning
-      value(E_XML) type STRING
-    raising
-      ZCX_GENERIC .
-  class-methods XML2DATA
-    importing
-      !I_XML type SIMPLE
-    exporting
-      !E_DATA type DATA
-    raising
-      ZCX_GENERIC .
   class-methods WRITE
     importing
       !I_VALUE type SIMPLE
@@ -257,13 +221,6 @@ public section.
       value(E_RESULT) type STRING
     raising
       ZCX_GENERIC .
-  class-methods TEXT_MD5
-    importing
-      !I_DATA type SIMPLE
-    returning
-      value(E_HASH) type MD5_FIELDS-HASH
-    raising
-      ZCX_GENERIC .
   class-methods BINARY_MD5
     importing
       !I_DATA type XSTRING
@@ -286,10 +243,10 @@ public section.
       !I_WAIT type ABAP_BOOL default ABAP_TRUE
     raising
       ZCX_GENERIC .
+  class-methods ROLLBACK .
   class-methods FLUSH
     raising
       ZCX_GENERIC .
-  class-methods ROLLBACK .
   class-methods GET_TRANSACTION_ENQUEUE_OWNER
     returning
       value(E_OWNER) type EQEUSR .
@@ -317,7 +274,7 @@ CLASS ZCL_ABAP_STATIC IMPLEMENTATION.
     check i_data is not initial.
 
     data lt_data type solix_tab.
-    zcl_binary_static=>value2table(
+    zcl_convert_static=>xtext2xtable(
       exporting i_data  = i_data
       importing et_data = lt_data ).
 
@@ -424,7 +381,7 @@ CLASS ZCL_ABAP_STATIC IMPLEMENTATION.
   endmethod.
 
 
-  method COMMIT.
+  method commit.
 
     data ls_return type bapiret2.
     call function 'BAPI_TRANSACTION_COMMIT'
@@ -527,77 +484,6 @@ CLASS ZCL_ABAP_STATIC IMPLEMENTATION.
   endmethod.
 
 
-  method csv2table.
-
-    data lr_converter type ref to cl_rsda_csv_converter.
-    lr_converter =
-      cl_rsda_csv_converter=>create(
-        i_separator = ';' ).
-
-    data l_data like line of it_data.
-    loop at it_data into l_data.
-
-      data l_data_c(65535).
-      l_data_c = l_data.
-
-      field-symbols <ls_data> type any.
-      append initial line to et_data assigning <ls_data>.
-
-      lr_converter->csv_to_structure(
-        exporting i_data   = l_data_c
-        importing e_s_data = <ls_data> ).
-
-      data lr_descr type ref to cl_abap_structdescr.
-      if lr_descr is not bound.
-        lr_descr ?= cl_abap_structdescr=>describe_by_data( <ls_data> ).
-      endif.
-
-      data ls_component like line of lr_descr->components.
-      loop at lr_descr->components into ls_component
-        where type_kind eq cl_abap_typedescr=>typekind_date.
-
-        field-symbols <l_value> type any.
-        assign component ls_component-name of structure <ls_data> to <l_value>.
-
-        if <l_value> eq '0'.
-          data l_date type d.
-          <l_value> = l_date.
-        endif.
-
-      endloop.
-
-    endloop.
-
-  endmethod.
-
-
-  method data2json.
-
-    data lr_json type ref to cl_trex_json_serializer.
-    create object lr_json
-      exporting
-        data = i_data.
-
-    lr_json->serialize( ).
-
-    e_json = lr_json->get_data( ).
-
-  endmethod.
-
-
-method data2xml.
-
-  try.
-      call transformation id
-        source data = i_data
-        result xml e_xml.
-    catch cx_root.
-      zcx_generic=>raise( ).
-  endtry.
-
-endmethod.
-
-
   method flush.
 
     cl_gui_cfw=>flush(
@@ -686,23 +572,6 @@ endmethod.
     if i_bool is initial.
       e_bool = abap_true.
     endif.
-
-  endmethod.
-
-
-  method JSON2DATA.
-
-  data l_json type string.
-  l_json = i_json.
-
-  data lr_json type ref to cl_trex_json_deserializer.
-  create object lr_json.
-
-  lr_json->deserialize(
-    exporting
-      json = l_json
-    importing
-      abap = e_data ).
 
   endmethod.
 
@@ -856,34 +725,9 @@ endmethod.
   endmethod.
 
 
-  method ROLLBACK.
+  method rollback.
 
     call function 'BAPI_TRANSACTION_ROLLBACK'.
-
-  endmethod.
-
-
-  method table2csv.
-
-    data lr_converter type ref to cl_rsda_csv_converter.
-    lr_converter =
-      cl_rsda_csv_converter=>create(
-        i_separator = ';' ).
-
-    field-symbols <ls_data> type any.
-    loop at it_data assigning <ls_data>.
-
-      data l_data_c(65353).
-      lr_converter->structure_to_csv(
-        exporting i_s_data = <ls_data>
-        importing e_data   = l_data_c ).
-
-      data l_data type string.
-      l_data = l_data_c.
-
-      insert l_data into table et_data.
-
-    endloop.
 
   endmethod.
 
@@ -981,24 +825,6 @@ endmethod.
       endif.
 
     endloop.
-
-  endmethod.
-
-
-  method text_md5.
-
-    call function 'MD5_CALCULATE_HASH_FOR_CHAR'
-      exporting
-        data           = i_data
-      importing
-        hash           = e_hash
-      exceptions
-        no_data        = 1
-        internal_error = 2
-        others         = 3.
-    if sy-subrc ne 0.
-      zcx_generic=>raise( ).
-    endif.
 
   endmethod.
 
@@ -1215,19 +1041,4 @@ endmethod.
     e_text = l_text.
 
   endmethod.
-
-
-method xml2data.
-
-  check i_xml is not initial.
-
-  try.
-      call transformation id
-        source xml i_xml
-        result data = e_data.
-    catch cx_root.
-      zcx_generic=>raise( ).
-  endtry.
-
-endmethod.
 ENDCLASS.
